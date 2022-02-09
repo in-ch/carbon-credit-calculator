@@ -39,24 +39,37 @@ const ContentWrapper = styled.div`
 const IntroducePdfDiv = styled.div`
     flex:5;
     display:flex;
+    flex-direction:column;
     min-height:150px;
     justify-content:center;
     align-items:center;
+    img {
+        width:25px;
+    }
+    h2{
+        margin-top:20px;
+        font-size:28px;
+        font-weight:normal;
+    }
+    p{
+        font-size:12px;
+        color:RGB(150,150,150);
+        margin-top:15px;
+    }
     input{
-        width:120px;
-        height:40px;
+        padding-left:20px;
+        padding-right:20px;
+        height:50px;
+        margin-top:50px;
         text-align:center;
-        border:2px solid #3cb47499;
-        background-color:white;
+        background-color:#5b4c3d;
         font-weight:bold;
-        color:#999ea1;
-        position:relative;
-        top:-50px;
+        color:white;
+        border-radius:15px;
         @media (max-width: 520px) {
             top:0px;
         }
         &:hover{
-            border:2px solid white;
             background-color:#3cb47499;
             color:white;
             transition: 0.5s all;
@@ -331,13 +344,15 @@ const Home = () => {
                 <Wrapper>
                     <ContentWrapper>
                         <IntroducePdfDiv>
-                            <a target="_blank" rel="noreferrer" href="https://daewon-resourse.s3.ap-northeast-2.amazonaws.com/companyIntroduce.pdf">
-                                <input 
-                                    type="button" 
-                                    
-                                    value="회사소개서 📁"
-                                />
-                            </a>
+                            <img 
+                                src={require("../assets/imgs/582cfbd96dbce.png")} 
+                            />
+                            <h2>A 운수회사 사례</h2>
+                            <p>A회사가 보유한 CNG 버스 100대를 전기버스로 교체한 경우 온실가스 감축량은? (평균 운행거리 200km/일)</p>
+                            <input type="button" value="39,650톤의 온실가스 감축과 약 12억원의 수익 발생" />
+                            <br/>
+                            <p>- 년간 3,965톤, 1억 2천만원의 수익 발생 (총 10년 기준)</p>
+                            <p>- 30년생 소나무 3,671그루를 심은 것과 동일한 효과  * 30년생 소나무 CO2 흡수량(저장량) 10.8ton</p>
                         </IntroducePdfDiv>    
                         
                         <SlideDiv>
