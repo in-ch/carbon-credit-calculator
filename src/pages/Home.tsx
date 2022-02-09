@@ -17,12 +17,13 @@ const Bar = styled.div<BarProps>`
     width:80%;
     height:6px;
     border-radius: 3px;
-    background-color:#7f94b9;
+    background-color:rgba(92, 242, 162,0.6);
     margin:0 auto;
+    margin-top:30px;
     div{
         width:${(props)=>props.num * BarEnum }%;
         height:6px;
-        background-color:#273e6a;
+        background-color:#3cb47499;
         border-radius: 3px;
         transition: 0.5s All;
     }
@@ -45,10 +46,10 @@ const IntroducePdfDiv = styled.div`
         width:120px;
         height:40px;
         text-align:center;
-        border:2px solid #273170;
+        border:2px solid #3cb47499;
         background-color:white;
         font-weight:bold;
-        color:#273170;
+        color:#999ea1;
         position:relative;
         top:-50px;
         @media (max-width: 520px) {
@@ -56,7 +57,7 @@ const IntroducePdfDiv = styled.div`
         }
         &:hover{
             border:2px solid white;
-            background-color:#273170;
+            background-color:#3cb47499;
             color:white;
             transition: 0.5s all;
         }
@@ -89,7 +90,7 @@ const SlideDiv = styled.div<DivProps>`
     input[type=text]{
         width:100%;
         margin-top:10px;
-        border-bottom:1px solid #273e6a;
+        border-bottom:1px solid #3cb47499;
         height:50px;
         @media (max-width: 520px) {
             width:100%;
@@ -105,7 +106,7 @@ const SlideDiv = styled.div<DivProps>`
         margin-top:10px;
         height:80px;
         border:0;
-        border-bottom:1px solid #273e6a;
+        border-bottom:1px solid #3cb47499;
         outline:0;
     }
     .check{
@@ -136,8 +137,8 @@ const Input = styled.input`
     width:80px;
     height:40px;
     text-align:center;
-    border:2px solid #273170;
-    color:#273170;
+    border:2px solid #3cb47499;
+    color:#999ea1;
     font-weight:bold;
 `;
 const SlideWrapper = styled.div`
