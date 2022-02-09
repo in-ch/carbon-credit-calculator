@@ -66,6 +66,7 @@ const IntroducePdfDiv = styled.div`
         font-weight:bold;
         color:white;
         border-radius:15px;
+        box-shadow:2px 5px 10px 0px rgba(100,100,100,0.5);
         @media (max-width: 520px) {
             top:0px;
         }
@@ -127,7 +128,7 @@ const SlideDiv = styled.div<DivProps>`
         width:445px;
         height:40px;
         padding-top:10px;
-        margin-top: 10px;
+        margin-top: 30px;
         @media (max-width: 520px) {
             width:100%;
         }
@@ -157,9 +158,9 @@ const Input = styled.input`
 const SlideWrapper = styled.div`
     overflow-y:hidden;
     width:445px;
-    height:300px;
+    height:360px;
     position:relative;
-    top:-100px;
+    top:-28px;
     @media (max-width: 520px) {
         width:100%;
     }
@@ -169,8 +170,11 @@ const Slide = styled.div<DivProps>`
     overflow:hidden;
     opacity:${(props)=>props.pagination === props.num ? 1 : 0.2};
     transition: all 0.2s;
-    height:300px;
-    padding-top:100px;  
+    height:360px;
+    padding-top:50px;  
+    h2{
+        font-size:28px;
+    }
 `;
 const HighLite = styled.span`
     color:red;
@@ -189,7 +193,25 @@ const SpinnerWrapper = styled.div`
         color:RGB(150,150,150);
     }
 `;
-
+const BButton = styled.input`
+    width:120px;
+    height:50px;
+    border-radius:20px;
+    border:2px solid #5b4c3d;
+    margin-top:40px;
+    text-align:center;
+    box-shadow:2px 5px 10px 0px rgba(100,100,100,0.5);
+    margin-right:20px;
+`;
+const SubTitleWrapper = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content:space-between;
+    height:25px;
+`;
+const BackP = styled.p`
+    color:RGB(100,100,100);
+`;
 interface DivProps {
     pagination?:number,
     num?:number,
@@ -208,7 +230,7 @@ const Home = () => {
     const inputRef4 = useRef<HTMLInputElement | null>(null);
     const inputRef5 = useRef<HTMLTextAreaElement | null>(null);
    
-    const [name, setName] = useState<string>('');
+    const [type, setType] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
     const [consultType, setConsultType] = useState<string>('');
@@ -217,13 +239,16 @@ const Home = () => {
     const onChange = (e:any, setState:any) => {
         setState(e.target.value);
     }
-    const onChangeSelect = (e:any) => {
-        setConsultType(e.target.value);
-    };
+    const onClick = (e:any, setState:any) => {
+        setState(e.target.value);
+        setTimeout(()=>{
+            goToUp(2);
+        },500);
+    }
 
     const goToMove = (value:number) => {
         progressRef.current?.scrollTo({
-            top:value*(300),
+            top:value*(360),
             behavior:'smooth',
         });
         if(value===2){
@@ -261,8 +286,8 @@ const Home = () => {
 
     const setNumHook = (value:number) => {
         if(value === 2){
-            if(name === ''){
-                alert("성함을 입력해주세요.");
+            if(type === ''){
+                alert("연류 종류를 알려주세요.");
                 inputRef1?.current?.focus();
             } else {
                 setNum(value);
@@ -270,7 +295,7 @@ const Home = () => {
             }
         } else if(value === 3) {
             if(email === '') {
-                alert("이메일을 알려주세요.");
+                alert("일평균 운행거리를 알려주세요.");
                 inputRef2?.current?.focus();
             } else {
                 setNum(value);
@@ -278,41 +303,15 @@ const Home = () => {
             }
         } else if(value === 4) {
             if(phone === '') {
-                alert("연락처를 알려주세요.");
+                alert("전기차 교체 댓수를 알려주세요.");
                 inputRef3?.current?.focus();
-            } else {
-                setNum(value);
-                goToMove(value);
-            }
-        } else if(value === 5) {
-            if(consultType === '') {
-                alert("상담 종류를 알려주세요.");
-                inputRef4?.current?.focus();
-            } else {
-                setNum(value);
-                goToMove(value);
-            }
-        } else if(value === 6) {
-            if(consultDes === '') {
-                alert("자세한 내용을 알려주세요.");
-                inputRef5?.current?.focus();
-            } else {
+            } else { 
                 setNum(value);
                 goToMove(value);
                 setTimeout(()=>{
-                    setNumHook(7);
-                    goToMove(7);
-                    // mutationInsertConsult({
-                    //     variables:{
-                    //         input:{
-                    //             name,
-                    //             phone,
-                    //             email,
-                    //             consultDes,
-                    //             consultType
-                    //         }
-                    //     }
-                    // });
+                    setNumHook(5);
+                    goToMove(5);
+                    // done
                 },2000);
             }
         } else {
@@ -320,6 +319,8 @@ const Home = () => {
             goToMove(value);
         }
     };
+
+
 
     useEffect(()=>{
         (document.activeElement as HTMLElement).blur();
@@ -361,23 +362,39 @@ const Home = () => {
                                     <SpinnerWrapper>
                                         <ScaleLoader height="50" width="10" color="#6b5ce7" radius="8" />
                                         <br/><br/>
-                                        <p>잠시만요....</p>
                                     </SpinnerWrapper>
                                 </Slide>
 
                                 <Slide
                                     pagination={1}
                                     num={num}
+                                    style={{
+                                        position:"relative",
+                                        top:10
+                                    }}
                                 >
-                                    <Subtitle>1)</Subtitle> <h2>안녕하세요. 담당자님, 성함이 어떻게 되세요? <HighLite>*</HighLite></h2>
-                                    <input 
-                                        placeholder="성함" 
-                                        type="text" 
+                                    <SubTitleWrapper>
+                                        <Subtitle>1)</Subtitle>
+                                        <BackP
+                                            style={{color:'white'}}
+                                        >뒤로가기</BackP>
+                                    </SubTitleWrapper>
+                                     <h2>안녕하세요. 연료 종류를 알려주세요. <HighLite>*</HighLite></h2>
+                                    <BButton 
+                                        value="CNG" 
+                                        type="button" 
                                         onKeyDown={(e)=>goToKeyDown(2,e)}
-                                        onChange={(e)=>onChange(e, setName)}
-                                        value={name}
+                                        onClick={(e)=>onClick(e, setType)}
                                         ref={inputRef1}
                                     />
+                                    <BButton 
+                                        value="경유" 
+                                        type="button" 
+                                        onKeyDown={(e)=>goToKeyDown(2,e)}
+                                        onClick={(e)=>onClick(e, setType)}
+                                        ref={inputRef1}
+                                    />
+
                                     <div className="check">
                                         <Input 
                                             onClick={(e)=>goToUp(2)} 
@@ -392,9 +409,17 @@ const Home = () => {
                                     pagination={2}
                                     num={num}
                                 >
-                                    <Subtitle>2)</Subtitle><h2>이메일 주소를 알려주시면 관련 자료를 보내드릴게요. <HighLite>*</HighLite></h2>
+                                    <SubTitleWrapper>
+                                        <Subtitle>2)</Subtitle>
+                                        <BackP
+                                            onClick={()=>goToUp(1)}
+                                        >뒤로가기</BackP>
+                                    </SubTitleWrapper>
+                                    <h2
+                                        style={{marginTop:14}}
+                                    >일평균 운행거리를 알려주세요. <HighLite>*</HighLite></h2>
                                     <input 
-                                        placeholder="some@example.com" 
+                                        placeholder="ex) 100km" 
                                         type="text" 
                                         onKeyDown={(e)=>goToKeyDown(3,e)}
                                         ref={inputRef2}
@@ -410,9 +435,17 @@ const Home = () => {
                                     pagination={3}
                                     num={num}
                                 >
-                                    <Subtitle>3)</Subtitle><h2>연락처를 알려주세요. 안내를 도와드립니다.<HighLite>*</HighLite></h2>
+                                    <SubTitleWrapper>
+                                        <Subtitle>3)</Subtitle>
+                                        <BackP
+                                            onClick={()=>goToUp(2)}
+                                        >뒤로가기</BackP>
+                                    </SubTitleWrapper>
+                                    <h2
+                                        style={{marginTop:14}}
+                                    >전기차 전환 댓수를 알려주세요.<HighLite>*</HighLite></h2>
                                     <input 
-                                        placeholder="010-1234-5678" 
+                                        placeholder="10대" 
                                         type="text" 
                                         onKeyDown={(e)=>goToKeyDown(4,e)}
                                         ref={inputRef3}
@@ -428,51 +461,14 @@ const Home = () => {
                                     pagination={4}
                                     num={num}
                                 >
-                                    <Subtitle>4)</Subtitle><h2>상담 종류를 알려주세요. <HighLite>*</HighLite></h2>
-                                    <br/>
-                                    <select
-                                        onChange={(e)=>onChangeSelect(e)}
-                                    >
-                                        <option value="개원 문의">선택하기</option>
-                                        <option value="개원 문의">개원 문의</option>
-                                        <option value="구매 문의">구매 문의</option>
-                                        <option value="입지 문의">입지 문의</option>
-                                        <option value="홈페이지 이용 문의">홈페이지 이용 문의</option>
-                                        <option value="사업 제휴 문의">사업 제휴 문의</option>
-                                        <option value="기타 문의">기타 문의</option>
-                                    </select>
-                                    <div className="check">
-                                        <Input onClick={()=>goToUp(5)} type="button" value="다음 ✔️" /><p>Enter ↵를 누르십시오</p>
-                                    </div>
-                                </Slide>
-
-                                <Slide
-                                    pagination={5}
-                                    num={num}
-                                >
-                                    <Subtitle>5)</Subtitle><h2>자세한 내용을 알려주세요. <HighLite>*</HighLite></h2>
-                                    <textarea
-                                        placeholder="어떤 내용이라도 좋습니다." 
-                                        ref={inputRef5}
-                                        value={consultDes}
-                                        onChange={(e)=>onChange(e,setConsultDes)}
-                                    />
-                                    <div className="check">
-                                        <Input onClick={()=>goToUp(6)} type="button" value="완료 ✔️" />
-                                    </div>
-                                </Slide>
-                                <Slide
-                                    pagination={6}
-                                    num={num}
-                                >
                                     <SpinnerWrapper>
                                         <ScaleLoader height="50" width="10" color="#6b5ce7" radius="8" />
                                         <br/><br/>
-                                        <p>조금만 기다려주세요..!!</p>
+                                        <p>계산 중입니다...</p>
                                     </SpinnerWrapper>
                                 </Slide>
                                 <Slide
-                                    pagination={7}
+                                    pagination={5}
                                     num={num}
                                 >
                                     <p>신청이 완료되었습니다.</p>
