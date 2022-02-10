@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import Header from "src/components/Header";
 import { Link } from "react-router-dom";
 
-
+import emailjs from 'emailjs-com';
+import { apikey } from "src/assets/apikey";
 
 const Wrapper = styled.div`
     width:90%;
@@ -509,11 +510,20 @@ const Home = () => {
         }
     };
 
-    const ConsultDone = () => {
+
+    const sendEmail = (e:any) => {
+        e.preventDefault();
         if(consultCompany !== "" && consultEmail !== "" && consultName !== "" && consultPhone !== "" && consultType !== "" && consultElectric !== ""){
-            console.log(consultCompany,consultEmail,consultName,consultPhone,consultType,consultElectric);
-            alert("상담 신청이 완료되었습니다. 이용해주셔서 감사합니다.");
-            window.location.reload();
+            emailjs.sendForm(apikey.SERVICE_ID, apikey.TEMPLATE_ID , e.target, apikey.USER_ID)
+            .then(result => {
+                    alert("상담 신청이 완료되었습니다. 이용해주셔서 감사합니다.");
+                    console.log(result);
+                    // window.location.reload();
+                },
+                error => {
+                    console.log(error);
+                    alert("에러가 발생했습니다.");
+            });            
         } else {
             alert("*는 필수값입니다.");
         }
@@ -686,7 +696,7 @@ const Home = () => {
                                     num={num}
                                 >
                                     <SpinnerWrapper>
-                                        <ScaleLoader height="50" width="10" color="#6b5ce7" radius="8" />
+                                        <ScaleLoader height="50" width="10" color="#5b4c3d" radius="8" />
                                         <br/><br/>
                                         <p>계산 중입니다...</p>
                                     </SpinnerWrapper>
@@ -720,76 +730,85 @@ const Home = () => {
                     <h1>* 무료 컨설팅 신청</h1>
                     <h5>간단한 정보를 입력해주시면 전화 또는 이메일로 답변드립니다.</h5>
                     <h5>(*는 필수입력 항목)</h5>
-                    <ConsultInputContainer>
-                        <ConsultInputWrapper>
-                            <h1>* 운수사명</h1>
-                            <input 
-                                type="text" 
-                                placeholder="운수사명"
-                                onChange={(e)=>onChange(e, setConsultCompany)}
-                                value={consultCompany}
+                    <form 
+                        onSubmit={sendEmail}
+                    >
+                        <ConsultInputContainer>
+                            <ConsultInputWrapper>
+                                <h1>* 운수사명</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="운수사명"
+                                    onChange={(e)=>onChange(e, setConsultCompany)}
+                                    value={consultCompany}
+                                    name="consultCompany"
+                                />
+                            </ConsultInputWrapper>
+                            <ConsultInputWrapper>
+                                <h1>* 이름</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="이름"
+                                    onChange={(e)=>onChange(e, setConsultName)}
+                                    value={consultName}
+                                    name="consultName"
+                                />
+                            </ConsultInputWrapper>
+                        </ConsultInputContainer>
+                        <ConsultInputContainer>
+                            <ConsultInputWrapper>
+                                <h1>* 연락처</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="연락처"
+                                    onChange={(e)=>onChange(e, setConsultPhone)}
+                                    value={consultPhone}
+                                    name="consultPhone"
+                                />
+                            </ConsultInputWrapper>
+                            <ConsultInputWrapper>
+                                <h1>* 이메일 주소</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="이메일 주소"
+                                    onChange={(e)=>onChange(e, setConsultEmail)}
+                                    value={consultEmail}
+                                    name="consultEmail"
+                                />
+                            </ConsultInputWrapper>
+                        </ConsultInputContainer>
+                        <ConsultInputContainer>
+                            <ConsultInputWrapper>
+                                <h1>* 전기차량 전환대수</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="전기차량 전환대수"
+                                    onChange={(e)=>onChange(e, setConsultElectric)}
+                                    value={consultElectric}
+                                    name="consultElectric"
+                                />
+                            </ConsultInputWrapper>
+                            <ConsultInputWrapper>
+                                <h1>* 기존 연류 종류</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="기존 연류 종류"
+                                    onChange={(e)=>onChange(e, setConsultType)}
+                                    value={consultType}
+                                    name="consultType"
+                                />
+                            </ConsultInputWrapper>
+                        </ConsultInputContainer>
+                        <SSubmitCCancelWrapper>
+                            <SSubmit 
+                                type="submit" value="신청 완료" 
                             />
-                        </ConsultInputWrapper>
-                        <ConsultInputWrapper>
-                            <h1>* 이름</h1>
-                            <input 
-                                type="text" 
-                                placeholder="이름"
-                                onChange={(e)=>onChange(e, setConsultName)}
-                                value={consultName}
+                            <CCancel 
+                                type="button" value="취 소" 
+                                onClick={()=>OnClickHide()}
                             />
-                        </ConsultInputWrapper>
-                    </ConsultInputContainer>
-                    <ConsultInputContainer>
-                        <ConsultInputWrapper>
-                            <h1>* 연락처</h1>
-                            <input 
-                                type="text" 
-                                placeholder="연락처"
-                                onChange={(e)=>onChange(e, setConsultPhone)}
-                                value={consultPhone}
-                            />
-                        </ConsultInputWrapper>
-                        <ConsultInputWrapper>
-                            <h1>* 이메일 주소</h1>
-                            <input 
-                                type="text" 
-                                placeholder="이메일 주소"
-                                onChange={(e)=>onChange(e, setConsultEmail)}
-                                value={consultEmail}
-                            />
-                        </ConsultInputWrapper>
-                    </ConsultInputContainer>
-                    <ConsultInputContainer>
-                        <ConsultInputWrapper>
-                            <h1>* 전기차량 전환대수</h1>
-                            <input 
-                                type="text" 
-                                placeholder="전기차량 전환대수"
-                                onChange={(e)=>onChange(e, setConsultElectric)}
-                                value={consultElectric}
-                            />
-                        </ConsultInputWrapper>
-                        <ConsultInputWrapper>
-                            <h1>* 기존 연류 종류</h1>
-                            <input 
-                                type="text" 
-                                placeholder="기존 연류 종류"
-                                onChange={(e)=>onChange(e, setConsultType)}
-                                value={consultType}
-                            />
-                        </ConsultInputWrapper>
-                    </ConsultInputContainer>
-                    <SSubmitCCancelWrapper>
-                        <SSubmit 
-                            type="button" value="신청 완료" 
-                            onClick={()=>ConsultDone()}
-                        />
-                        <CCancel 
-                            type="button" value="취 소" 
-                            onClick={()=>OnClickHide()}
-                        />
-                    </SSubmitCCancelWrapper>
+                        </SSubmitCCancelWrapper>
+                    </form>
                 </ConsultWrapper>
             </ConsultContainer>
         </>
