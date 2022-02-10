@@ -12,7 +12,7 @@ const Wrapper = styled.div`
     min-height:500px;
     padding-top:40px;
 `
-const BarEnum = 100/7;
+const BarEnum = 100/5;
 const Bar = styled.div<BarProps>`
     width:80%;
     height:6px;
@@ -183,6 +183,14 @@ const HighLite = styled.span`
     margin-top:2px;
     margin-right:10px;
 `;
+const HighLite2 = styled.span`
+    color:#05d16199;
+    opacity:0.5;
+    font-size:18px;
+    margin-top:2px;
+    margin-right:10px;
+    font-weight:bold;
+`;
 const SpinnerWrapper = styled.div`
     width:100%;
     display:flex;
@@ -193,15 +201,17 @@ const SpinnerWrapper = styled.div`
         color:RGB(150,150,150);
     }
 `;
-const BButton = styled.input`
+const BButton = styled.input<ButtonProps>`
     width:120px;
     height:50px;
     border-radius:20px;
-    border:2px solid #5b4c3d;
+    border:2px solid ${(props)=>props.text===props.ttype ? '#3cb47499' : '#5b4c3d'};
     margin-top:40px;
     text-align:center;
     box-shadow:2px 5px 10px 0px rgba(100,100,100,0.5);
     margin-right:20px;
+    color:${(props)=>props.text===props.ttype ? '#fff' : '#000'};
+    background-color:${(props)=>props.text===props.ttype ? '#3cb47499' : '#fff'};
 `;
 const SubTitleWrapper = styled.div`
     display:flex;
@@ -219,7 +229,10 @@ interface DivProps {
 interface BarProps {
     num:number
 };
-
+interface ButtonProps {
+    text:string;
+    ttype:string;
+}
 const Home = () => {
     
     const [num, setNum] = useState<number>(0);
@@ -229,21 +242,16 @@ const Home = () => {
     const inputRef3 = useRef<HTMLInputElement | null>(null);
     const inputRef4 = useRef<HTMLInputElement | null>(null);
     const inputRef5 = useRef<HTMLTextAreaElement | null>(null);
-   
+
     const [type, setType] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
-    const [consultType, setConsultType] = useState<string>('');
-    const [consultDes, setConsultDes] = useState<string>('');
 
     const onChange = (e:any, setState:any) => {
         setState(e.target.value);
     }
     const onClick = (e:any, setState:any) => {
         setState(e.target.value);
-        setTimeout(()=>{
-            goToUp(2);
-        },500);
     }
 
     const goToMove = (value:number) => {
@@ -327,6 +335,9 @@ const Home = () => {
         setTimeout(()=>{
             setNum(1);
             goToMove(1);
+            inputRef1?.current?.click();
+            inputRef1?.current?.focus();
+
         },1500);
     },[]);
 
@@ -386,13 +397,16 @@ const Home = () => {
                                         onKeyDown={(e)=>goToKeyDown(2,e)}
                                         onClick={(e)=>onClick(e, setType)}
                                         ref={inputRef1}
+                                        text="CNG"
+                                        ttype={type}
                                     />
                                     <BButton 
                                         value="경유" 
                                         type="button" 
                                         onKeyDown={(e)=>goToKeyDown(2,e)}
                                         onClick={(e)=>onClick(e, setType)}
-                                        ref={inputRef1}
+                                        text="경유"
+                                        ttype={type}
                                     />
 
                                     <div className="check">
@@ -471,12 +485,15 @@ const Home = () => {
                                     pagination={5}
                                     num={num}
                                 >
-                                    <p>신청이 완료되었습니다.</p>
-                                    <h2 style={{
+                                    <h2>계산 결과 </h2>
+                                    <h3 style={{
                                         marginTop:30,
-                                    }}>담당자가 곧 연락드립니다.</h2>
+                                    }}>총 절감량 : <HighLite2>39,650</HighLite2>톤/10년</h3>
+                                    <h3>총 기대수익 : <HighLite2>12</HighLite2>억원</h3>
+                                    <h3>30년생 소나무 : <HighLite2>3,671</HighLite2>그루 심은 것과 같습니다.</h3>
                                     <div className="check">
                                         <Input onClick={()=>goToUp(1)} type="button" value="확인 완료 ✔️" style={{width:100,marginTop:20}} />
+                                        <Input onClick={()=>goToUp(1)} type="button" value="무료 컨설팅 신청하기 ✔️" style={{width:150,marginTop:20,marginLeft:20}} />
                                     </div>
                                 </Slide>
                             </SlideWrapper>
