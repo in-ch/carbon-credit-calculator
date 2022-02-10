@@ -254,7 +254,7 @@ interface ButtonProps {
     text:string;
     ttype:string;
 }
-const Home = () => {
+const Home2 = () => {
     
     const [num, setNum] = useState<number>(0);
     const progressRef = useRef<HTMLDivElement | null>(null);
@@ -372,17 +372,16 @@ const Home = () => {
                 >
                     <div />
                 </Bar>
-                
+
                 <CContainer>
                     <Link to="/" >
-                        <HP>버스</HP>
+                        <p>버스</p>
                     </Link>
                     <Link to="/taxi">
-                        <p>택시</p>
+                        <HP>택시</HP>
                     </Link>
                 </CContainer>
-                
-                
+
                 <Wrapper>
                     <ContentWrapper>
                         <IntroducePdfDiv>
@@ -535,4 +534,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Home2;

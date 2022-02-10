@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div`
@@ -19,9 +20,11 @@ const Container = styled.div`
 
 const Header = () => {
     return (
-        <Container>
-            <p>탄소 배출량 계산기</p>
-        </Container>
+        <>
+            <Container>
+                <p>탄소 배출량 계산기</p>
+            </Container>
+        </>
     );
 };
 
