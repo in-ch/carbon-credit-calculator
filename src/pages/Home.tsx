@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useEffect, useRef, useState } from "react";
-import Header from "src/components/Header";
 import { Link } from "react-router-dom";
 
 import emailjs from 'emailjs-com';
@@ -57,6 +56,7 @@ const IntroducePdfDiv = styled.div`
         font-size:12px;
         color:RGB(150,150,150);
         margin-top:15px;
+        text-align:center;
     }
     input{
         padding-left:20px;
@@ -176,6 +176,9 @@ const Slide = styled.div<DivProps>`
     padding-top:50px;  
     h2{
         font-size:28px;
+        @media (max-width: 520px) {
+            font-size:20px;
+        }
     }
 `;
 const HighLite = styled.span`
@@ -518,7 +521,7 @@ const Home = () => {
             .then(result => {
                     alert("상담 신청이 완료되었습니다. 이용해주셔서 감사합니다.");
                     console.log(result);
-                    // window.location.reload();
+                    window.location.reload();
                 },
                 error => {
                     console.log(error);
@@ -578,6 +581,7 @@ const Home = () => {
                         <IntroducePdfDiv>
                             <img 
                                 src={require("../assets/imgs/582cfbd96dbce.png")} 
+                                alt="이미지"
                             />
                             <h2>A 운수회사 사례</h2>
                             <p>A회사가 보유한 CNG 버스 100대를 전기버스로 교체한 경우 온실가스 감축량은? (평균 운행거리 200km/일)</p>

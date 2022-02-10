@@ -1,10 +1,10 @@
 import styled from "styled-components";
 import ScaleLoader from "react-spinners/ScaleLoader";
 import { useEffect, useRef, useState } from "react";
-import Header from "src/components/Header";
 import { Link } from "react-router-dom";
 
-
+import emailjs from 'emailjs-com';
+import { apikey } from "src/assets/apikey";
 
 const Wrapper = styled.div`
     width:90%;
@@ -56,6 +56,7 @@ const IntroducePdfDiv = styled.div`
         font-size:12px;
         color:RGB(150,150,150);
         margin-top:15px;
+        text-align:center;
     }
     input{
         padding-left:20px;
@@ -175,6 +176,9 @@ const Slide = styled.div<DivProps>`
     padding-top:50px;  
     h2{
         font-size:28px;
+        @media (max-width: 520px) {
+            font-size:20px;
+        }
     }
 `;
 const HighLite = styled.span`
@@ -239,6 +243,107 @@ const CContainer = styled.div`
         margin-left:10px;
     }
 `;
+
+
+const ConsultContainer = styled.div<ConsultShow>`
+    width:100%;
+    height:100vh;
+    position:fixed;
+    top:0px;
+    left:0px;
+    background-color:RGBA(0,0,0,0.3);
+    z-index:2;
+    display:${(props)=>props.consultShow ? 'flex' : 'none'};
+    justify-content:center;
+    align-items:center;
+    
+`;
+const ConsultWrapper = styled.div`
+    width:60%;
+    height:80vh;
+    background-color:white;
+    border-radius:30px;
+    padding:30px;
+    display:flex;
+    flex-direction:column;
+    @media (max-width: 520px) {
+            width:90%;
+            height:90vh;
+    }
+
+    h1{
+        font-size:25px;
+        font-weight:bold;
+    }
+    h5{
+        font-size:16px;
+        margin-top:15px;
+    }
+`;
+const ConsultInputContainer = styled.div`
+    width:100%;
+    display:flex;
+    flex-direction:row;
+    margin-top:30px;
+`;
+const ConsultInputWrapper = styled.div`
+    display:flex;
+    flex-direction:column;
+    flex:5;
+    height:90px;
+    h1{
+        font-weight:normal;
+        font-size:18px;
+        @media (max-width: 520px) {
+            font-size:12px;
+        }
+    }
+    input{
+        width:80%;
+        border:2px solid rgb(120,120,120);
+        height:50px;
+        margin-top:10px;
+        border-radius:20px;
+        padding-left:10px;
+        box-shadow:5px 5px 5px 2px rgba(0,0,0,0.2);
+    }
+`;
+const SSubmitCCancelWrapper = styled.div`
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    align-items:center;
+`;
+const SSubmit = styled.input`
+    width:140px;
+    height:40px;
+    text-align:center;
+    background-color:#3cb47499;
+    color:white;
+    margin-top:50px;
+    margin-right:5px;
+    @media (max-width: 520px) {
+        width:40%;
+        font-size:10px;
+        margin-top:20px;
+    }
+`;
+
+const CCancel = styled.input`
+    width:140px;
+    height:40px;
+    text-align:center;
+    background-color:#5b4c3d;
+    color:white;
+    margin-top:50px;
+    margin-left:5px;
+    @media (max-width: 520px) {
+        width:40%;
+        font-size:10px;
+        margin-top:25px;
+    }
+`;
+
 const HP = styled.p`
     color:#1c6b4199;
     border-bottom:2px solid #1c6b4199;
@@ -254,6 +359,9 @@ interface ButtonProps {
     text:string;
     ttype:string;
 }
+interface ConsultShow{
+    consultShow:boolean;
+}
 const Home2 = () => {
     
     const [num, setNum] = useState<number>(0);
@@ -267,6 +375,22 @@ const Home2 = () => {
     const [type, setType] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [phone, setPhone] = useState<string>('');
+
+    const [result1, setResult1] = useState<number>(0);
+    const [result2, setResult2] = useState<number>(0);
+    const [result3, setResult3] = useState<number>(0);
+
+
+    const [consultShow, setConsultShow] = useState<boolean>(false);
+
+    const [consultCompany, setConsultCompany] = useState<string>("");
+    const [consultName, setConsultName] = useState<string>("");
+    const [consultPhone, setConsultPhone] = useState<string>("");
+    const [consultEmail, setConsultEmail] = useState<string>("");
+    const [consultElectric, setConsultElectric] = useState<string>("");
+    const [consultType, setConsultType] = useState<string>("");
+     
+
 
     const onChange = (e:any, setState:any) => {
         setState(e.target.value);
@@ -341,7 +465,13 @@ const Home2 = () => {
                     setNumHook(5);
                     goToMove(5);
                     // done
-                },2000);
+
+                    console.log(type, email, phone);
+                    Calculate();
+                },2000);  
+
+                // email = 운행거리 
+                // phone = 전환 댓수 
             }
         } else {
             setNum(value);
@@ -349,6 +479,58 @@ const Home2 = () => {
         }
     };
 
+    const Calculate = () => {
+        if(type==="LPG"){
+            let base = 0.000406315 * parseInt((email)) * 365;   // 베이스라인 배출량  
+            let charge = parseInt(email)*365*0.172413793;  // 충전 전력량
+            let business = ((charge*0.4567)/1000) + ((charge*0.0036)/1000000) + ((charge*0.0085)/1000000);  // 사업 배출량 
+            let one = (base - business)*parseInt((phone));  // 온실가스 감축량
+            console.log("결과 : "+base,charge,business, one.toFixed(2)); 
+
+            let result11 = Math.floor((7 * Math.round(Number(one.toFixed(2))))); // 총 절감량 
+            let result22 = Math.round((result11 * 30000)/10000);
+            let result33 = Math.floor((result11)/10.8);
+
+            setResult1(result11);
+            setResult2(result22);
+            setResult3(result33);
+        } else if(type==="경유"){
+            let base = 0.0001482 * parseInt((email)) * 365;   // 베이스라인 배출량  
+            let charge = parseInt(email)*365*0.172413793;  // 충전 전력량
+            let business = ((charge*0.4567)/1000) + ((charge*0.0036)/1000000) + ((charge*0.0085)/1000000);  // 사업 배출량 
+            let one = (base - business)*parseInt((phone));  // 온실가스 감축량
+            console.log("결과 : "+base,charge,business, one.toFixed(2)); 
+
+            let result11 = Math.floor((7 * Math.round(Number(one.toFixed(2))))); // 총 절감량 
+            let result22 = Math.round((result11 * 30000)/10000);
+            let result33 = Math.floor((result11)/10.8);
+
+            setResult1(result11);
+            setResult2(result22);
+            setResult3(result33);
+        } else {
+            alert("오류가 발생했습니다. 관리자에게 문의해주세요.");
+        }
+    };
+
+
+    const sendEmail = (e:any) => {
+        e.preventDefault();
+        if(consultCompany !== "" && consultEmail !== "" && consultName !== "" && consultPhone !== "" && consultType !== "" && consultElectric !== ""){
+            emailjs.sendForm(apikey.SERVICE_ID, apikey.TEMPLATE_ID , e.target, apikey.USER_ID)
+            .then(result => {
+                    alert("상담 신청이 완료되었습니다. 이용해주셔서 감사합니다.");
+                    console.log(result);
+                    window.location.reload();
+                },
+                error => {
+                    console.log(error);
+                    alert("에러가 발생했습니다.");
+            });            
+        } else {
+            alert("*는 필수값입니다.");
+        }
+    };
 
 
     useEffect(()=>{
@@ -362,6 +544,17 @@ const Home2 = () => {
         },1500);
     },[]);
 
+
+
+    const OnClickShow = () => {
+        setConsultShow(true);
+    };
+
+    const OnClickHide = () => {
+        setConsultShow(false);
+    };
+
+
     return (
         <>
             <div style={{
@@ -372,7 +565,7 @@ const Home2 = () => {
                 >
                     <div />
                 </Bar>
-
+                
                 <CContainer>
                     <Link to="/" >
                         <p>버스</p>
@@ -381,26 +574,28 @@ const Home2 = () => {
                         <HP>택시</HP>
                     </Link>
                 </CContainer>
-
+                
+                
                 <Wrapper>
                     <ContentWrapper>
                         <IntroducePdfDiv>
                             <img 
                                 src={require("../assets/imgs/582cfbd96dbce.png")} 
+                                alt="이미지"
                             />
-                            <h2>A 운수회사 사례</h2>
-                            <p>A회사가 보유한 CNG 버스 100대를 전기버스로 교체한 경우 온실가스 감축량은? (평균 운행거리 200km/일)</p>
-                            <input type="button" value="39,650톤의 온실가스 감축과 약 12억원의 수익 발생" />
+                            <h2>전기택시 사례</h2>
+                            <p>택시 1대를 전기택시로 교체한 경우 온실가스 감축량은? (평균 운행거리 200km/일)</p>
+                            <input type="button" value="35톤의 온실가스 감축과 약 107억원의 수익 발생" />
                             <br/>
-                            <p>- 년간 3,965톤, 1억 2천만원의 수익 발생 (총 10년 기준)</p>
-                            <p>- 30년생 소나무 3,671그루를 심은 것과 동일한 효과  * 30년생 소나무 CO2 흡수량(저장량) 10.8ton</p>
+                            <p>- 년간 5톤, 약 15만원의 수익 발생 (총7년 기준)</p>
+                            <p>- 30년생 소나무 3그루를 심은 것과 동일한 효과  * 30년생 소나무 CO2  흡수량(저장량) 10.8ton</p>
                         </IntroducePdfDiv>    
                         
                         <SlideDiv>
                             <SlideWrapper ref={progressRef}>
                                 <Slide>
                                     <SpinnerWrapper>
-                                        <ScaleLoader height="50" width="10" color="#6b5ce7" radius="8" />
+                                        <ScaleLoader height="50" width="10" color="#5b4c3d" radius="8" />
                                         <br/><br/>
                                     </SpinnerWrapper>
                                 </Slide>
@@ -419,14 +614,14 @@ const Home2 = () => {
                                             style={{color:'white'}}
                                         >뒤로가기</BackP>
                                     </SubTitleWrapper>
-                                     <h2>안녕하세요. 연료 종류를 알려주세요. <HighLite>*</HighLite></h2>
+                                     <h2>기존택시 연료 종류를 알려주세요. <HighLite>*</HighLite></h2>
                                     <BButton 
-                                        value="CNG" 
+                                        value="LPG" 
                                         type="button" 
                                         onKeyDown={(e)=>goToKeyDown(2,e)}
                                         onClick={(e)=>onClick(e, setType)}
                                         ref={inputRef1}
-                                        text="CNG"
+                                        text="LPG"
                                         ttype={type}
                                     />
                                     <BButton 
@@ -486,7 +681,7 @@ const Home2 = () => {
                                     </SubTitleWrapper>
                                     <h2
                                         style={{marginTop:14}}
-                                    >전기차 전환 댓수를 알려주세요.<HighLite>*</HighLite></h2>
+                                    >전기택시 전환 댓수를 알려주세요.<HighLite>*</HighLite></h2>
                                     <input 
                                         placeholder="10대" 
                                         type="text" 
@@ -505,7 +700,7 @@ const Home2 = () => {
                                     num={num}
                                 >
                                     <SpinnerWrapper>
-                                        <ScaleLoader height="50" width="10" color="#6b5ce7" radius="8" />
+                                        <ScaleLoader height="50" width="10" color="#5b4c3d" radius="8" />
                                         <br/><br/>
                                         <p>계산 중입니다...</p>
                                     </SpinnerWrapper>
@@ -517,12 +712,12 @@ const Home2 = () => {
                                     <h2>계산 결과 </h2>
                                     <h3 style={{
                                         marginTop:30,
-                                    }}>총 절감량 : <HighLite2>39,650</HighLite2>톤/10년</h3>
-                                    <h3>총 기대수익 : <HighLite2>12</HighLite2>억원</h3>
-                                    <h3>30년생 소나무 : <HighLite2>3,671</HighLite2>그루 심은 것과 같습니다.</h3>
+                                    }}>총 절감량 : <HighLite2>{result1}</HighLite2>톤/7년</h3>
+                                    <h3>총 기대수익 : <HighLite2>{result2}</HighLite2>만원</h3>
+                                    <h3>30년생 소나무 : <HighLite2>{result3}</HighLite2>그루 심은 것과 같습니다.</h3>
                                     <div className="check">
                                         <Input onClick={()=>goToUp(1)} type="button" value="확인 완료 ✔️" style={{width:100,marginTop:20}} />
-                                        <Input onClick={()=>goToUp(1)} type="button" value="무료 컨설팅 신청하기 ✔️" style={{width:150,marginTop:20,marginLeft:20}} />
+                                        <Input onClick={()=>OnClickShow()} type="button" value="무료 컨설팅 신청하기 ✔️" style={{width:150,marginTop:20,marginLeft:20}} />
                                     </div>
                                 </Slide>
                             </SlideWrapper>
@@ -530,6 +725,96 @@ const Home2 = () => {
                     </ContentWrapper>
                 </Wrapper>
             </div>
+
+            <ConsultContainer
+                consultShow={consultShow}
+            >
+                <p>X</p>
+                <ConsultWrapper>
+                    <h1>* 무료 컨설팅 신청</h1>
+                    <h5>간단한 정보를 입력해주시면 전화 또는 이메일로 답변드립니다.</h5>
+                    <h5>(*는 필수입력 항목)</h5>
+                    <form 
+                        onSubmit={sendEmail}
+                    >
+                        <ConsultInputContainer>
+                            <ConsultInputWrapper>
+                                <h1>* 운수사명</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="운수사명"
+                                    onChange={(e)=>onChange(e, setConsultCompany)}
+                                    value={consultCompany}
+                                    name="consultCompany"
+                                />
+                            </ConsultInputWrapper>
+                            <ConsultInputWrapper>
+                                <h1>* 이름</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="이름"
+                                    onChange={(e)=>onChange(e, setConsultName)}
+                                    value={consultName}
+                                    name="consultName"
+                                />
+                            </ConsultInputWrapper>
+                        </ConsultInputContainer>
+                        <ConsultInputContainer>
+                            <ConsultInputWrapper>
+                                <h1>* 연락처</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="연락처"
+                                    onChange={(e)=>onChange(e, setConsultPhone)}
+                                    value={consultPhone}
+                                    name="consultPhone"
+                                />
+                            </ConsultInputWrapper>
+                            <ConsultInputWrapper>
+                                <h1>* 이메일 주소</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="이메일 주소"
+                                    onChange={(e)=>onChange(e, setConsultEmail)}
+                                    value={consultEmail}
+                                    name="consultEmail"
+                                />
+                            </ConsultInputWrapper>
+                        </ConsultInputContainer>
+                        <ConsultInputContainer>
+                            <ConsultInputWrapper>
+                                <h1>* 전기차량 전환대수</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="전기차량 전환대수"
+                                    onChange={(e)=>onChange(e, setConsultElectric)}
+                                    value={consultElectric}
+                                    name="consultElectric"
+                                />
+                            </ConsultInputWrapper>
+                            <ConsultInputWrapper>
+                                <h1>* 기존 연류 종류</h1>
+                                <input 
+                                    type="text" 
+                                    placeholder="기존 연류 종류"
+                                    onChange={(e)=>onChange(e, setConsultType)}
+                                    value={consultType}
+                                    name="consultType"
+                                />
+                            </ConsultInputWrapper>
+                        </ConsultInputContainer>
+                        <SSubmitCCancelWrapper>
+                            <SSubmit 
+                                type="submit" value="신청 완료" 
+                            />
+                            <CCancel 
+                                type="button" value="취 소" 
+                                onClick={()=>OnClickHide()}
+                            />
+                        </SSubmitCCancelWrapper>
+                    </form>
+                </ConsultWrapper>
+            </ConsultContainer>
         </>
     );
 };
