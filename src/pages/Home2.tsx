@@ -414,22 +414,22 @@ const Home2 = () => {
         if(value===2){
             setTimeout(()=>{
                 inputRef2?.current?.focus();
-            },401);
+            },701);
         }
         if(value===3){
             setTimeout(()=>{
                 inputRef3?.current?.focus();
-            },401);
+            },701);
         }
         if(value===4){
             setTimeout(()=>{
                 inputRef4?.current?.focus();
-            },401);
+            },701);
         }
         if(value===5){
             setTimeout(()=>{
                 inputRef5?.current?.focus();
-            },401);
+            },701);
         }
     };
 
