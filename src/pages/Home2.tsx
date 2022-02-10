@@ -731,7 +731,6 @@ const Home2 = () => {
             <ConsultContainer
                 consultShow={consultShow}
             >
-                <p>X</p>
                 <ConsultWrapper>
                     <h1>* 무료 컨설팅 신청</h1>
                     <h5>간단한 정보를 입력해주시면 전화 또는 이메일로 답변드립니다.</h5>
