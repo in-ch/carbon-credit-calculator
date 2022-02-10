@@ -69,6 +69,7 @@ const IntroducePdfDiv = styled.div`
         color:white;
         border-radius:15px;
         box-shadow:2px 5px 10px 0px rgba(100,100,100,0.5);
+        cursor: pointer;
         @media (max-width: 520px) {
             top:0px;
         }
@@ -108,6 +109,7 @@ const SlideDiv = styled.div<DivProps>`
         margin-top:10px;
         border-bottom:1px solid #3cb47499;
         height:50px;
+        cursor: pointer;
         @media (max-width: 520px) {
             width:100%;
         }
@@ -156,6 +158,7 @@ const Input = styled.input`
     border:2px solid #3cb47499;
     color:#999ea1;
     font-weight:bold;
+    cursor: pointer;
 `;
 const SlideWrapper = styled.div`
     overflow-y:hidden;
@@ -324,6 +327,7 @@ const SSubmit = styled.input`
     color:white;
     margin-top:50px;
     margin-right:5px;
+    cursor: pointer;
     @media (max-width: 520px) {
         width:40%;
         font-size:10px;
@@ -339,6 +343,7 @@ const CCancel = styled.input`
     color:white;
     margin-top:50px;
     margin-left:5px;
+    cursor: pointer;
     @media (max-width: 520px) {
         width:40%;
         font-size:10px;

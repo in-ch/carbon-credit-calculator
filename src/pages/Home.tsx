@@ -69,6 +69,7 @@ const IntroducePdfDiv = styled.div`
         color:white;
         border-radius:15px;
         box-shadow:2px 5px 10px 0px rgba(100,100,100,0.5);
+        cursor: pointer;
         @media (max-width: 520px) {
             top:0px;
         }
@@ -156,6 +157,7 @@ const Input = styled.input`
     border:2px solid #3cb47499;
     color:#999ea1;
     font-weight:bold;
+    cursor: pointer;
 `;
 const SlideWrapper = styled.div`
     overflow-y:hidden;
@@ -307,6 +309,7 @@ const ConsultInputWrapper = styled.div`
         border-radius:20px;
         padding-left:10px;
         box-shadow:5px 5px 5px 2px rgba(0,0,0,0.2);
+        cursor: pointer;
     }
 `;
 const SSubmitCCancelWrapper = styled.div`
@@ -323,6 +326,7 @@ const SSubmit = styled.input`
     color:white;
     margin-top:50px;
     margin-right:5px;
+    cursor: pointer;
     @media (max-width: 520px) {
         width:40%;
         font-size:10px;
@@ -338,6 +342,7 @@ const CCancel = styled.input`
     color:white;
     margin-top:50px;
     margin-left:5px;
+    cursor: pointer;
     @media (max-width: 520px) {
         width:40%;
         font-size:10px;
