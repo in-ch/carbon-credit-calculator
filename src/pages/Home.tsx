@@ -217,6 +217,7 @@ const BButton = styled.input<ButtonProps>`
     margin-right:20px;
     color:${(props)=>props.text===props.ttype ? '#fff' : '#000'};
     background-color:${(props)=>props.text===props.ttype ? '#3cb47499' : '#fff'};
+    cursor: pointer;
 `;
 const SubTitleWrapper = styled.div`
     display:flex;
