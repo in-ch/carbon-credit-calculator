@@ -670,7 +670,6 @@ const Home = () => {
                                         ref={inputRef2}
                                         onChange={(e)=>onChange(e, setEmail)}
                                         onBlur={(e)=>onChange(e, setEmail)}
-                                        value={email}
                                     />
                                     <div className="check">
                                         <Input onClick={()=>goToUp(3)} type="button" value="다음 ✔️" /><p>Enter ↵를 누르십시오</p>
@@ -697,7 +696,6 @@ const Home = () => {
                                         ref={inputRef3}
                                         onChange={(e)=>onChange(e, setPhone)}
                                         onBlur={(e)=>onChange(e, setPhone)}
-                                        value={phone}
                                     />
                                     <div className="check">
                                         <Input onClick={()=>goToUp(4)} type="button" value="다음 ✔️" /><p>Enter ↵를 누르십시오</p>
@@ -753,7 +751,6 @@ const Home = () => {
                                     placeholder="운수사명"
                                     onChange={(e)=>onChange(e, setConsultCompany)}
                                     onBlur={(e)=>onChange(e, setConsultCompany)}
-                                    value={consultCompany}
                                     name="consultCompany"
                                 />
                             </ConsultInputWrapper>
@@ -764,7 +761,6 @@ const Home = () => {
                                     placeholder="이름"
                                     onChange={(e)=>onChange(e, setConsultName)}
                                     onBlur={(e)=>onChange(e, setConsultName)}
-                                    value={consultName}
                                     name="consultName"
                                 />
                             </ConsultInputWrapper>
@@ -777,7 +773,6 @@ const Home = () => {
                                     placeholder="연락처"
                                     onChange={(e)=>onChange(e, setConsultPhone)}
                                     onBlur={(e)=>onChange(e, setConsultPhone)}
-                                    value={consultPhone}
                                     name="consultPhone"
                                 />
                             </ConsultInputWrapper>
@@ -788,7 +783,6 @@ const Home = () => {
                                     placeholder="이메일 주소"
                                     onChange={(e)=>onChange(e, setConsultEmail)}
                                     onBlur={(e)=>onChange(e, setConsultEmail)}
-                                    value={consultEmail}
                                     name="consultEmail"
                                 />
                             </ConsultInputWrapper>
@@ -801,7 +795,6 @@ const Home = () => {
                                     placeholder="전기차량 전환대수"
                                     onChange={(e)=>onChange(e, setConsultElectric)}
                                     onBlur={(e)=>onChange(e, setConsultElectric)}
-                                    value={consultElectric}
                                     name="consultElectric"
                                 />
                             </ConsultInputWrapper>
@@ -812,7 +805,6 @@ const Home = () => {
                                     placeholder="기존 연류 종류"
                                     onChange={(e)=>onChange(e, setConsultType)}
                                     onBlur={(e)=>onChange(e, setConsultType)}
-                                    value={consultType}
                                     name="consultType"
                                 />
                             </ConsultInputWrapper>
