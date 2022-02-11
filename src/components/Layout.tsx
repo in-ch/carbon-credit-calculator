@@ -13,11 +13,6 @@ export const GlobalStyle = createGlobalStyle`
     }
     *{
         box-sizing:border-box;
-        -webkit-user-select:none; 
-        -khtml-user-select:none; 
-        -moz-user-select:none; 
-        -ms-user-select:none; 
-        user-select:none;
     }
     body{
         font-size:14px;
@@ -38,6 +33,12 @@ export const GlobalStyle = createGlobalStyle`
     a{
         color: inherit;
         text-decoration: none;
+    }
+    input, textarea {
+        -moz-user-select: auto;
+        -webkit-user-select: auto;
+        -ms-user-select: auto;
+        user-select: auto;
     }
 `;
 
