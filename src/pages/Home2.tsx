@@ -230,6 +230,7 @@ const SubTitleWrapper = styled.div`
 `;
 const BackP = styled.p`
     color:RGB(100,100,100);
+    cursor: pointer;
 `;
 const CContainer = styled.div`
     width:100%;
@@ -669,6 +670,7 @@ const Home2 = () => {
                                         onKeyDown={(e)=>goToKeyDown(3,e)}
                                         ref={inputRef2}
                                         onChange={(e)=>onChange(e, setEmail)}
+                                        onBlur={(e)=>onChange(e, setEmail)}
                                         value={email}
                                     />
                                     <div className="check">
@@ -695,6 +697,7 @@ const Home2 = () => {
                                         onKeyDown={(e)=>goToKeyDown(4,e)}
                                         ref={inputRef3}
                                         onChange={(e)=>onChange(e, setPhone)}
+                                        onBlur={(e)=>onChange(e, setPhone)}
                                         value={phone}
                                     />
                                     <div className="check">
@@ -750,6 +753,7 @@ const Home2 = () => {
                                     type="text" 
                                     placeholder="운수사명"
                                     onChange={(e)=>onChange(e, setConsultCompany)}
+                                    onBlur={(e)=>onChange(e, setConsultCompany)}
                                     value={consultCompany}
                                     name="consultCompany"
                                 />
@@ -760,6 +764,7 @@ const Home2 = () => {
                                     type="text" 
                                     placeholder="이름"
                                     onChange={(e)=>onChange(e, setConsultName)}
+                                    onBlur={(e)=>onChange(e, setConsultName)}
                                     value={consultName}
                                     name="consultName"
                                 />
@@ -772,6 +777,7 @@ const Home2 = () => {
                                     type="text" 
                                     placeholder="연락처"
                                     onChange={(e)=>onChange(e, setConsultPhone)}
+                                    onBlur={(e)=>onChange(e, setConsultPhone)}
                                     value={consultPhone}
                                     name="consultPhone"
                                 />
@@ -782,6 +788,7 @@ const Home2 = () => {
                                     type="text" 
                                     placeholder="이메일 주소"
                                     onChange={(e)=>onChange(e, setConsultEmail)}
+                                    onBlur={(e)=>onChange(e, setConsultEmail)}
                                     value={consultEmail}
                                     name="consultEmail"
                                 />
@@ -794,6 +801,7 @@ const Home2 = () => {
                                     type="text" 
                                     placeholder="전기차량 전환대수"
                                     onChange={(e)=>onChange(e, setConsultElectric)}
+                                    onBlur={(e)=>onChange(e, setConsultElectric)}
                                     value={consultElectric}
                                     name="consultElectric"
                                 />
@@ -804,6 +812,7 @@ const Home2 = () => {
                                     type="text" 
                                     placeholder="기존 연류 종류"
                                     onChange={(e)=>onChange(e, setConsultType)}
+                                    onBlur={(e)=>onChange(e, setConsultType)}
                                     value={consultType}
                                     name="consultType"
                                 />
