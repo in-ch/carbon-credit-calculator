@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 import reset from "styled-reset";
-import Header from "../components/Header";
 
 export const GlobalStyle = createGlobalStyle`
     ${reset}
