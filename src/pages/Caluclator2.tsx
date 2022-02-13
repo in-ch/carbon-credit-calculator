@@ -157,8 +157,8 @@ const Calculator2 = () => {
 
     const inputRef2 = useRef<HTMLInputElement | null>(null);
     const inputRef3 = useRef<HTMLInputElement | null>(null);
-
-    const [unit,setUnit] = useState("만 원");
+    
+    const [unit]  = useState("만 원");
     useEffect(()=>{
     },[]);
 
