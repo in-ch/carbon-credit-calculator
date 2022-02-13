@@ -1,7 +1,8 @@
 import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import Calculator from "./pages/Calculator";
+import Calculator2 from "./pages/Caluclator2";
 import Home from "./pages/Home";
-import Home2 from "./pages/Home2";
 
 function App() {
   return (
@@ -12,7 +13,10 @@ function App() {
                   <Home />
               </Route>
               <Route path="/taxi" exact>
-                  <Home2 />
+                  <Calculator2 />
+              </Route>
+              <Route path="/bus" exact>
+                  <Calculator />
               </Route>
           </Switch>
       </Router>

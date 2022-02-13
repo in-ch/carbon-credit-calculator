@@ -494,6 +494,10 @@ const Home = () => {
             let one = (base - business)*parseInt((phone));  // 온실가스 감축량
             console.log("결과 : "+base,charge,business, one.toFixed(2)); 
 
+
+            // 0억원 이하일 때문에 단위를 변경 
+            // 계산기 버전으로 디자인 변경 
+            
             let result11 = Math.floor((10 * Math.round(Number(one.toFixed(2))))); // 총 절감량 
             let result22 = Math.round((result11 * 30000)/100000000);
             let result33 = Math.floor((result11)/10.8);
