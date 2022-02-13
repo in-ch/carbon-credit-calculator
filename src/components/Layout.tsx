@@ -55,7 +55,6 @@ const Layout = ({children}:Props) => {
         <>
             <GlobalStyle />
             <Container>
-                {/* <Header /> */}
                 {children}
             </Container>
         </>

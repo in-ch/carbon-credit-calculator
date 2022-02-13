@@ -9,14 +9,11 @@ function App() {
     <Layout>
       <Router>
           <Switch>
-              <Route path="/" exact>
-                  <Home />
+              <Route path="/" exact component={Home}>
               </Route>
-              <Route path="/taxi" exact>
-                  <Calculator2 />
+              <Route path="/taxi" exact component={Calculator2}>
               </Route>
-              <Route path="/bus" exact>
-                  <Calculator />
+              <Route path="/bus" exact component={Calculator}>
               </Route>
           </Switch>
       </Router>
