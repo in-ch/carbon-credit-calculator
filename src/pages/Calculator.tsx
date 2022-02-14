@@ -65,16 +65,32 @@ const InputDiv = styled.div`
     justify-content:space-between;
     p{
         font-size:18px;
+        width:230px;
     }
     select{
         width:100px;
         height:40px;
+        border:1px solid rgb(200,200,200);
+        border-radius:10px;
     }
     input{
-        width:100px;
+        width:25%;
         height:40px;
         border-bottom:1px solid rgba(0,0,0,0.3);
     }
+`;
+const Unit = styled.h5`
+    font-size:14px;
+    font-weight:normal;
+    margin:0px;
+    width:30px;
+    border-bottom:1px solid rgba(0,0,0,0.3);
+    height:40px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    position:relative;
+    left:-2px;
 `;
 const IInputDiv = styled.div`
     width:100%;
@@ -85,8 +101,8 @@ const IInputDiv = styled.div`
     align-items:center;
     justify-content:space-between;
     p{
-        font-size:14px;
-        width:33%;
+        font-size:16px;
+        width:35%;
         color:white;
         font-weight:bold;
         @media (max-width: 520px) {
@@ -96,6 +112,13 @@ const IInputDiv = styled.div`
     h5{
         width:33%;
         color:white;
+        padding-left:15px;
+        font-size:12px;
+    }
+    h4{
+        width:35%;
+        text-align:right;
+        color:#000;
     }
 `;
 const Result = styled.div`
@@ -112,7 +135,7 @@ const Result = styled.div`
     padding-top:20px;
     padding-left:20px;
     padding-right:20px;
-    background-color:#46a87499;
+    background-color:#3db7ef;
     box-shadow:2px 2px 5px 1px rgba(0,0,0,0.2);
     h1{
         text-align:left;
@@ -131,11 +154,18 @@ const Submit = styled.div`
     height:50px;
     position:absolute;
     bottom:0px;
-    background-color:#5b4c3d;
+    background-color:#f9b333;
     display:flex;
     justify-content:center;
     align-items:center;
     cursor: pointer;
+    div{
+        flex:5;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        cursor: pointer;
+    }
     p{
         color:white;
         font-size:20px;
@@ -145,6 +175,7 @@ const Submit = styled.div`
         height:30px;
     }
 `;
+
 const Calculator = () => {
 
     const [type, setType] = useState<string>('CNG');
@@ -256,7 +287,7 @@ const Calculator = () => {
                     </Link>
                 </Header>
                 <InputDiv>
-                    <p>-  연류 종류</p>
+                    <p>-  연료 종류</p>
                     <select
                         onChange={(e)=>onChange(e,setType)}
                     >
@@ -265,50 +296,61 @@ const Calculator = () => {
                     </select>
                 </InputDiv>
                 <InputDiv>
-                    <p>-  일평균 운행거리</p>
+                    <p>-  일평균 운행거리(km)</p>
                     <input 
-                        type="text" 
-                        placeholder="ex) 100km"
+                        type="number" 
+                        placeholder="ex) 100"
                         onChange={(e)=>onChange(e, setEmail)}
                         onBlur={(e)=>onChange(e, setEmail)}
                         ref={inputRef2}
                         onKeyDown={(e)=>goToKeyDown(e)}
+                        maxLength={8}
                     />
+                    <Unit>km</Unit>
                 </InputDiv>
                 <InputDiv>
-                    <p>-  전기차 전환댓수</p>
+                    <p>-  전기차 전환대수</p>
                     <input 
-                        type="text" 
-                        placeholder="ex) 200대"
+                        type="number" 
+                        placeholder="ex) 200"
                         onChange={(e)=>onChange(e, setPhone)}
                         onBlur={(e)=>onChange(e, setPhone)}
                         ref={inputRef3}
                         onKeyDown={(e)=>goToKeyDown(e)}
+                        maxLength={8}
                     />
+                    <Unit>대</Unit>
                 </InputDiv>
                 <Result>
                     <h1>계산 결과</h1>
                     <Hr/>
                     <IInputDiv>
-                        <p>-  총 절감량</p>
+                        <p>총 절감량</p>
                         <h5>{numberWithCommas(result1)}</h5>
-                        <p>톤/10년</p>
+                        <h4>톤/10년</h4>
                     </IInputDiv>
                     <IInputDiv>
-                        <p>-  총 기대수익</p>
+                        <p>총 기대수익</p>
                         <h5>{numberWithCommas(result2)}</h5>
-                        <p>{unit}</p>
+                        <h4>{unit}</h4>
                     </IInputDiv>
                     <IInputDiv>
-                        <p>-  30년 생 소나무</p>
+                        <p>30년 생 소나무</p>
                         <h5>{numberWithCommas(result3)}</h5>
-                        <p>그루를 심는 것과 같습니다.</p>
+                        <h4>그루를 심는 것<br/>과 같습니다.</h4>
                     </IInputDiv>
                 </Result>
-                <Submit
-                    onClick={()=>Calculate()}
-                >
-                    <p>계산하기</p>
+                <Submit>
+                    <div
+                        onClick={()=>Calculate()}
+                    >
+                        <p>계산하기</p>
+                    </div>
+                    <div>
+                        <a href="https://hooxipartners.com/contact" >
+                            <p>상담 신청</p>
+                        </a>
+                    </div>
                 </Submit>
             </CalculatorWrapper>
         </Container>
