@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 const CalculatorWrapper = styled.div`
     width:400px;
-    height:550px;
+    height:620px;
     border-radius:20px;
     background-color:#fff;
     box-shadow:5px 5px 5px 1px rgba(0,0,0,0.2);
@@ -33,6 +33,18 @@ const Header = styled.div`
     flex-direction:row;
     align-items:center;
     justify-content:center;
+    div{
+        width:100px;
+        height:30px;
+        border:1px solid #4F71BE;
+        text-align:center;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+    }
+    .focus{
+        background-color:#4F71BE;
+    }
 `;
 const HEADING = styled.h5`
     margin-top:20px;
@@ -42,14 +54,12 @@ const HEADING = styled.h5`
     color:RGB(80,80,80);
 `;
 const HP = styled.p`
-    color:#1c6b4199;
-    border-bottom:2px solid #1c6b4199;
+    color:#fff;
     margin-left:7px;
     margin-right:7px;
 `;
 const PP = styled.p`
     color:#000;
-    border-bottom:2px solid #fff;
     margin-left:7px;
     margin-right:7px;
 `;
@@ -66,12 +76,12 @@ const InputDiv = styled.div`
     p{
         font-size:18px;
         width:230px;
+        font-weight:normal;
     }
     select{
         width:100px;
         height:40px;
-        border:1px solid rgb(200,200,200);
-        border-radius:10px;
+        border:1px solid rgb(255,255,255);
     }
     input{
         width:25%;
@@ -114,11 +124,31 @@ const IInputDiv = styled.div`
         color:white;
         padding-left:15px;
         font-size:12px;
+        text-align:right;
     }
     h4{
         width:35%;
         text-align:right;
         color:#000;
+        text-align:left;
+        margin-left:10px;
+    }
+`;
+const IIInputDiv = styled.div`
+    width:120px;
+    height:40px;
+    margin: 0 auto;
+    margin-top:10px;
+    margin-bottom:10px;
+    border-radius:10px;
+    background-color:#f9b333;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    cursor: pointer;
+    p{
+        color:#000;
+        font-weight:bold;
     }
 `;
 const Result = styled.div`
@@ -135,7 +165,7 @@ const Result = styled.div`
     padding-top:20px;
     padding-left:20px;
     padding-right:20px;
-    background-color:#3db7ef;
+    background-color:#4F71BE;
     box-shadow:2px 2px 5px 1px rgba(0,0,0,0.2);
     h1{
         text-align:left;
@@ -277,14 +307,18 @@ const Calculator = () => {
     return (
         <Container>
             <CalculatorWrapper>
-                <HEADING>탄소 배출 계산기</HEADING>
+                <HEADING>탄소배출권 수익성 계산기</HEADING>
                 <Header>
-                    <Link to="/bus">
-                        <HP>버스</HP>
-                    </Link>
-                    <Link to="/taxi">
-                        <PP>택시</PP>
-                    </Link>
+                    <div className="focus">
+                        <Link to="/bus">
+                            <HP>버스</HP>
+                        </Link>
+                    </div>
+                    <div>
+                        <Link to="/taxi">
+                            <PP>택시</PP>
+                        </Link>
+                    </div>
                 </Header>
                 <InputDiv>
                     <p>-  연료 종류</p>
@@ -309,7 +343,7 @@ const Calculator = () => {
                     <Unit>km</Unit>
                 </InputDiv>
                 <InputDiv>
-                    <p>-  전기차 전환대수</p>
+                    <p>-  전기차 전환대수(대)</p>
                     <input 
                         type="number" 
                         placeholder="ex) 200"
@@ -321,6 +355,11 @@ const Calculator = () => {
                     />
                     <Unit>대</Unit>
                 </InputDiv>
+                <IIInputDiv
+                    onClick={()=>Calculate()}
+                >
+                    <p>계산하기</p>
+                </IIInputDiv>
                 <Result>
                     <h1>계산 결과</h1>
                     <Hr/>
@@ -335,20 +374,16 @@ const Calculator = () => {
                         <h4>{unit}</h4>
                     </IInputDiv>
                     <IInputDiv>
-                        <p>30년 생 소나무</p>
-                        <h5>{numberWithCommas(result3)}</h5>
-                        <h4>그루를 심는 것<br/>과 같습니다.</h4>
+                        <p style={{
+                            width:"100%",
+                            textAlign:"center"
+                        }}>* 30년 생 소나무 {numberWithCommas(result3)}그루를 심는 것과 같습니다.</p>
                     </IInputDiv>
                 </Result>
                 <Submit>
-                    <div
-                        onClick={()=>Calculate()}
-                    >
-                        <p>계산하기</p>
-                    </div>
                     <div>
                         <a href="https://hooxipartners.com/contact" >
-                            <p>상담 신청</p>
+                            <p>무료상담 신청하기</p>
                         </a>
                     </div>
                 </Submit>
