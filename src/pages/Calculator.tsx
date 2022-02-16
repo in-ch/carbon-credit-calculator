@@ -389,7 +389,7 @@ const Calculator = () => {
                 </Result>
                 <Submit>
                     <div>
-                        <a href="https://hooxipartners.com/contact" >
+                        <a href="https://hooxipartners.com/contact"  target="_blank">
                             <p>무료 상담 신청하기</p>
                         </a>
                     </div>
