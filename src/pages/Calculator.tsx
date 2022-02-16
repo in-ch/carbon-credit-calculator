@@ -202,9 +202,10 @@ const Submit = styled.div`
         align-items:center;
         cursor: pointer;
     }
-    p{
+    h5{
         color:white;
         font-size:20px;
+        font-weight:normal;
     }
     img{
         width:30px;
@@ -390,7 +391,7 @@ const Calculator = () => {
                 <Submit>
                     <div>
                         <a href="https://hooxipartners.com/contact"  target="_blank">
-                            <p>무료 상담 신청하기</p>
+                            <h5>무료 상담 신청하기</h5>
                         </a>
                     </div>
                 </Submit>
