@@ -53,6 +53,9 @@ const HEADING = styled.h5`
     text-align:center;
     font-weight:bold;
     color:RGB(80,80,80);
+    @media (max-width: 520px) {
+        font-size:16px;
+    }
 `;
 const HP = styled.p`
     color:#fff;
@@ -116,6 +119,7 @@ const IInputDiv = styled.div`
         width:35%;
         color:white;
         font-weight:bold;
+        text-align:right;
         @media (max-width: 520px) {
             font-size:12px;
         }
@@ -124,7 +128,7 @@ const IInputDiv = styled.div`
         width:33%;
         color:white;
         padding-left:15px;
-        font-size:12px;
+        font-size:16px;
         text-align:right;
     }
     h4{
@@ -132,6 +136,7 @@ const IInputDiv = styled.div`
         text-align:right;
         color:#000;
         text-align:left;
+        font-size:12px;
         margin-left:10px;
     }
 `;
@@ -308,7 +313,7 @@ const Calculator2 = () => {
                     </div>
                 </Header>
                 <InputDiv>
-                    <p>-  연류 종류</p>
+                    <p>-  연료 종류</p>
                     <select
                         onChange={(e)=>onChange(e,setType)}
                     >
@@ -363,14 +368,15 @@ const Calculator2 = () => {
                     <IInputDiv>
                         <p style={{
                             width:"100%",
-                            textAlign:"center"
-                        }}>* 30년 생 소나무 {numberWithCommas(result3)}그루를 심는 것과 같습니다.</p>
+                            textAlign:"center",
+                            fontSize:12
+                        }}>* 30년 생 소나무 {numberWithCommas(result3)}그루를 <br/>심는 것과 같습니다.</p>
                     </IInputDiv>
                 </Result>
                 <Submit>
                     <div>
                         <a href="https://hooxipartners.com/contact" >
-                            <p>상담 신청</p>
+                            <p>무료상담 신청하기</p>
                         </a>
                     </div>
                 </Submit>

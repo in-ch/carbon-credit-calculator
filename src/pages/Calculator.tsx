@@ -52,6 +52,9 @@ const HEADING = styled.h5`
     text-align:center;
     font-weight:bold;
     color:RGB(80,80,80);
+    @media (max-width: 520px) {
+        font-size:16px;
+    }
 `;
 const HP = styled.p`
     color:#fff;
@@ -115,6 +118,7 @@ const IInputDiv = styled.div`
         width:35%;
         color:white;
         font-weight:bold;
+        text-align:right;
         @media (max-width: 520px) {
             font-size:12px;
         }
@@ -123,7 +127,7 @@ const IInputDiv = styled.div`
         width:33%;
         color:white;
         padding-left:15px;
-        font-size:12px;
+        font-size:16px;
         text-align:right;
     }
     h4{
@@ -132,6 +136,7 @@ const IInputDiv = styled.div`
         color:#000;
         text-align:left;
         margin-left:10px;
+        font-size:12px;
     }
 `;
 const IIInputDiv = styled.div`
@@ -376,8 +381,9 @@ const Calculator = () => {
                     <IInputDiv>
                         <p style={{
                             width:"100%",
-                            textAlign:"center"
-                        }}>* 30년 생 소나무 {numberWithCommas(result3)}그루를 심는 것과 같습니다.</p>
+                            textAlign:"center",
+                            fontSize:12
+                        }}>* 30년 생 소나무 {numberWithCommas(result3)}그루를 <br/>심는 것과 같습니다.</p>
                     </IInputDiv>
                 </Result>
                 <Submit>
