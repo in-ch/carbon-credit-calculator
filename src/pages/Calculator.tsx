@@ -382,14 +382,14 @@ const Calculator = () => {
                         <p style={{
                             width:"100%",
                             textAlign:"center",
-                            fontSize:12
+                            fontSize:15
                         }}>* 30년 생 소나무 {numberWithCommas(result3)}그루를 <br/>심는 것과 같습니다.</p>
                     </IInputDiv>
                 </Result>
                 <Submit>
                     <div>
                         <a href="https://hooxipartners.com/contact" >
-                            <p>무료상담 신청하기</p>
+                            <p>무료 상담 신청하기</p>
                         </a>
                     </div>
                 </Submit>
