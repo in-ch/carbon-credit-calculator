@@ -16,6 +16,7 @@ const CalculatorWrapper = styled.div`
     width:400px;
     height:620px;
     border-radius:20px;
+    padding-top:10px;
     background-color:#fff;
     box-shadow:5px 5px 5px 1px rgba(0,0,0,0.2);
     position:relative;
