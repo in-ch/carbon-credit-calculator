@@ -24,6 +24,7 @@ const CalculatorWrapper = styled.div`
 
     @media (max-width: 520px) {
         width:95%;
+        height:580px;
     }
 `;
 const Header = styled.div`
@@ -77,10 +78,16 @@ const InputDiv = styled.div`
     flex-direction:row;
     align-items:center;
     justify-content:space-between;
+    @media (max-width: 520px) {
+        height:40px;
+    }
     p{
         font-size:18px;
         width:230px;
         font-weight:normal;
+        @media (max-width: 520px) {
+            font-size:16px;
+        }
     }
     select{
         width:100px;
@@ -114,6 +121,9 @@ const IInputDiv = styled.div`
     flex-direction:row;
     align-items:center;
     justify-content:space-between;
+    @media (max-width: 520px) {
+        height:40px;
+    }
     p{
         font-size:16px;
         width:35%;
