@@ -278,10 +278,10 @@ const Calculator = () => {
             console.log(result11*30000/100000000);
             let result22 = 0;
             if((result11*30000/100000000)<1){
-                result22 = Math.round((result11 * 30000)/10000);
+                result22 = Math.round(((result11 * 30000)/10000 + Number.EPSILON) * 100) / 100;
                 setUnit("만 원");
             } else {
-                result22 = Math.round((result11 * 30000)/100000000);
+                result22 =  Math.round(((result11 * 30000)/100000000 + Number.EPSILON) * 100) / 100
                 setUnit("억 원");
             }
             let result33 = Math.floor((result11)/10.8);
@@ -299,10 +299,10 @@ const Calculator = () => {
 
             let result22 = 0;
             if((result11*30000/100000000)<1){
-                result22 = Math.round((result11 * 30000)/10000);
+                result22 = Math.round(((result11 * 30000)/10000 + Number.EPSILON) * 100) / 100;
                 setUnit("만 원");
             } else {
-                result22 = Math.round((result11 * 30000)/100000000);
+                result22 =  Math.round(((result11 * 30000)/100000000 + Number.EPSILON) * 100) / 100
                 setUnit("억 원");
             }
             let result33 = Math.floor((result11)/10.8);
@@ -400,7 +400,7 @@ const Calculator = () => {
                 </Result>
                 <Submit>
                     <div>
-                        <a href="https://hooxipartners.com/contact"  target="_blank">
+                        <a href="https://hooxipartners.com/contact"  rel="noreferrer" target="_blank">
                             <h5>무료 상담 신청하기</h5>
                         </a>
                     </div>

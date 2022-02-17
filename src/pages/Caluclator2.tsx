@@ -276,7 +276,7 @@ const Calculator2 = () => {
             console.log("사업 배출량"+business, " 베이스라인 배출량" +base);
 
             let result11 = Math.floor((7 * Math.round(Number(one.toFixed(2))))); // 총 절감량 
-            let result22 = Math.round((result11 * 30000)/10000);
+            let result22 = Math.round(((result11 * 30000)/10000 + Number.EPSILON) * 100) / 100;
             let result33 = Math.floor((result11)/10.8);
 
             setResult1(result11);
@@ -290,7 +290,7 @@ const Calculator2 = () => {
 
 
             let result11 = Math.floor((7 * Math.round(Number(one.toFixed(2))))); // 총 절감량 
-            let result22 = Math.round((result11 * 30000)/10000);;
+            let result22 = Math.round(((result11 * 30000)/10000 + Number.EPSILON) * 100) / 100;
 
             let result33 = Math.floor((result11)/10.8);
             
@@ -387,7 +387,7 @@ const Calculator2 = () => {
                 </Result>
                 <Submit>
                     <div>
-                        <a href="https://hooxipartners.com/contact" target="_blank">
+                        <a href="https://hooxipartners.com/contact" rel="noreferrer" target="_blank">
                             <h5>무료 상담 신청하기</h5>
                         </a>
                     </div>
